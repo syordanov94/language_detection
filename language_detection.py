@@ -11,26 +11,18 @@ CNST_LANG_DETECTION_RESULTS_FILE_NAME = "lang_detection_results.csv"
 CNST_LANG_DETECTION_DIFFERENCES_FILE_NAME = "lang_detection_differences.csv"
 
 def detect_language_with_langdetect(line): 
-    from langdetect import detect_langs 
-    lang = ""
-    prob = {}
+    from langdetect import detect_langs
     try: 
         langs = detect_langs(line) 
         for item in langs: 
-            if item.lang == "en": 
-                return item.lang, item.prob 
-            else: 
-                lang = item.lang 
-                prob = item.prob 
-            return lang, prob 
+            # The first one returned is usually the one that has the highest probability
+            return item.lang, item.prob 
     except: return "err", 0.0 
     
 def detect_language_with_langid(line): 
     from py3langid.langid import LanguageIdentifier, MODEL_FILE 
     identifier = LanguageIdentifier.from_pickled_model(MODEL_FILE, norm_probs=True) 
-    lang, prob = identifier.classify(line) 
-    if lang == "en": 
-        return lang, prob
+    lang, prob = identifier.classify(line)
     return lang, prob
 
 def write_data_to_csv(lines, langdetect_lang_results, langdetect_prob_results, langid_lang_results, langid_prob_results): 
