@@ -146,7 +146,7 @@ langid_lang_results = []
 langid_prob_results = []
 raw_text = []
 
-for i in range(1, len(lines)):
+for i in range(0, len(lines)):
     
     lines[i] = lines[i].translate(str.maketrans('', '', string.punctuation)).rstrip()
     
