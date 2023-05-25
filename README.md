@@ -33,6 +33,11 @@ make
 ```bash
 python3 language_detection.py
 ```
+or
+
+```bash
+python language_detection.py
+```
 
 - Once ran, this will produce an output like the following:
 
